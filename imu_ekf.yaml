@@ -1,0 +1,37 @@
+ekf_filter_node:
+  ros__parameters:
+
+    frequency: 30.0
+    two_d_mode: true
+
+    publish_tf: true
+
+    map_frame: map
+    odom_frame: odom
+    base_link_frame: base_link
+    world_frame: odom
+
+    # ----------------------------
+    # IMU INPUT
+    # ----------------------------
+    imu0: /imu/data
+
+    # IMPORTANT:
+    # Do NOT fuse orientation (we have none)
+    # Fuse ONLY angular velocity (gyro)
+    imu0_config: [
+      false, false, false,   # position
+      false, false, false,   # orientation (ROLL/PITCH/YAW) OFF
+      false, false, false,   # linear velocity
+      true,  true,  true,    # angular velocity ON (gx gy gz)
+      false, false, false    # linear acceleration OFF
+    ]
+
+    imu0_differential: false
+    imu0_relative: false
+
+    imu0_remove_gravitational_acceleration: true
+
+    # Let EKF start even without position sensors
+    permit_corrected_publication: true
+
